@@ -249,7 +249,12 @@ async function handlePlay() {
     const reward = calcReward(handsLeft.value)
     coins.value += reward
     await delay(400)
-    enterShop()
+    // 大盲注（最后一关）通关直接 won，不进商店
+    if (currentBlindIndex.value >= BLINDS.length - 1) {
+      gameState.value = 'won'
+    } else {
+      enterShop()
+    }
     return
   }
 
@@ -352,8 +357,11 @@ onMounted(() => {
 .main-area {
   flex: 1;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  /* Joker 段固定 230px，手牌+按钮段固定 280px（保证按钮不溢出 viewport），Played 段吸收剩余 */
+  grid-template-rows: 230px 1fr 280px;
   min-width: 0;
+  height: 100vh;
+  overflow: hidden;
   /* 不加 padding-right，否则 fixed 牌堆会浮在画布外 */
 }
 </style>

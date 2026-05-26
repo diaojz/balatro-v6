@@ -62,7 +62,7 @@ body {
     radial-gradient(ellipse 60% 40% at 50% 30%, rgba(179,136,255,.18), transparent 70%),
     radial-gradient(ellipse 90% 70% at 50% 50%, rgba(58,26,85,.55), transparent 75%),
     repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, #2a1240 0%, #1a2858 45%, #0a1438 100%);
+    linear-gradient(180deg, #0a1438 0%, #1a2858 45%, #0a1438 100%);
   background-attachment: fixed;
   color: var(--text);
 }
@@ -127,10 +127,10 @@ body {
   height: 100vh;
   background: linear-gradient(180deg, #1a2858 0%, #0d1a40 100%);
   border-right: 2px solid var(--sb-blue);
-  padding: 14px;
+  padding: 10px;       /* 缩紧 padding */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;            /* 缩紧 gap，让 8 块面板在 700-800px viewport 也能塞下 */
   overflow-y: auto;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -139,8 +139,12 @@ body {
   background: rgba(5,8,24,.6);
   border: 1px solid rgba(74,107,255,.4);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 8px 10px;   /* 紧凑：原 10/12，让 sidebar 在 700px viewport 也能容下 8 块 */
 }
+/* sidebar 滚动条显式可见（避免被隐藏），用户万一 viewport 太小至少能滚 */
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(74,107,255,.4); border-radius: 3px; }
 .hud-label {
   font: 600 13px/1 var(--sans);
   color: var(--text-dim);

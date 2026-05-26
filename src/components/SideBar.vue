@@ -33,7 +33,7 @@
 
     <!-- 4. HAND 计分块 -->
     <div class="sb-panel">
-      <div class="hand-type-name">{{ handName || '— 选牌出牌 —' }}</div>
+      <div class="hand-type-name" :class="{ empty: !handName }">{{ handName || '— 选牌出牌 —' }}</div>
       <div class="score-row">
         <div class="chips-block">
           <div class="score-num">{{ handChips }}</div>
@@ -175,6 +175,9 @@ const rewardPreview = computed(() => 5 + props.handsLeft)
   color: #60a5fa;
   margin-bottom: 8px;
   min-height: 14px;
+}
+.hand-type-name.empty {
+  color: var(--muted);  /* 未选时灰色，PRD §5.2 锁定 */
 }
 .score-row {
   display: flex;
