@@ -11,7 +11,7 @@ export const JOKERS = [
     art: '🃏',
     description: '每手 +4 倍率',
     // 无条件 +4 mult
-    effect: (cards, chips, mult, handTypeName) => ({ chips, mult: mult + 4 }),
+    effect: (_cards, chips, mult, _handTypeName) => ({ chips, mult: mult + 4 }),
   },
   {
     id: 'scholar',
@@ -21,7 +21,7 @@ export const JOKERS = [
     art: '📖',
     description: '每张 A：+4 倍率',
     // 出牌中每张 A 加 4 mult
-    effect: (cards, chips, mult, handTypeName) => {
+    effect: (cards, chips, mult, _handTypeName) => {
       const aces = cards.filter(c => c.rank === 'A').length
       return { chips, mult: mult + aces * 4 }
     },
@@ -34,7 +34,7 @@ export const JOKERS = [
     art: '❤️',
     description: '含 ♥ 时倍率 ×4',
     // 出牌中含红心 → mult × 4
-    effect: (cards, chips, mult, handTypeName) => {
+    effect: (cards, chips, mult, _handTypeName) => {
       const hasHeart = cards.some(c => c.suit === '♥')
       return { chips, mult: hasHeart ? mult * 4 : mult }
     },
@@ -47,7 +47,7 @@ export const JOKERS = [
     art: '♣',
     description: '含 ♣ 时倍率 ×4',
     // 出牌中含梅花 → mult × 4
-    effect: (cards, chips, mult, handTypeName) => {
+    effect: (cards, chips, mult, _handTypeName) => {
       const hasClub = cards.some(c => c.suit === '♣')
       return { chips, mult: hasClub ? mult * 4 : mult }
     },
@@ -60,7 +60,7 @@ export const JOKERS = [
     art: '👑',
     description: '含 J/Q/K 时倍率 ×10',
     // 出牌中含 J/Q/K → mult × 10
-    effect: (cards, chips, mult, handTypeName) => {
+    effect: (cards, chips, mult, _handTypeName) => {
       const hasRoyal = cards.some(c => ['J', 'Q', 'K'].includes(c.rank))
       return { chips, mult: hasRoyal ? mult * 10 : mult }
     },
@@ -73,7 +73,7 @@ export const JOKERS = [
     art: '🔥',
     description: '同花顺时 +50 倍率',
     // 同花顺才触发 → +50 mult
-    effect: (cards, chips, mult, handTypeName) => {
+    effect: (_cards, chips, mult, handTypeName) => {
       return { chips, mult: handTypeName === '同花顺' ? mult + 50 : mult }
     },
   },
